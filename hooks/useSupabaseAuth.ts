@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useUser, useAuth } from "@clerk/nextjs";  // useUser を追加
+import { useUser, useAuth } from "@clerk/nextjs"; // useUser を追加
 import supabase from "../lib/supabaseClient";
 
 export const useSupabaseAuth = () => {
-  const { getToken } = useAuth();  // useAuth はそのまま
-  const { user } = useUser();  // useUser を使ってユーザー情報を取得
+  const { getToken } = useAuth(); // useAuth はそのまま
+  const { user } = useUser(); // useUser を使ってユーザー情報を取得
 
   useEffect(() => {
     const setSupabaseAuth = async () => {
@@ -16,13 +16,11 @@ export const useSupabaseAuth = () => {
         supabase.auth.setSession({ access_token: token, refresh_token: "" });
 
         // ユーザー情報をSupabaseのusersテーブルに保存
-        const { data, error } = await supabase
-          .from("users")
-          .upsert([
-            {
-              id: user.id,  // ClerkのユーザーID
-            },
-          ]);
+        const { data, error } = await supabase.from("users").upsert([
+          {
+            id: user.id, // ClerkのユーザーID
+          },
+        ]);
 
         if (error) {
           console.error("Supabaseにユーザー情報を保存できませんでした:", error);
@@ -33,5 +31,5 @@ export const useSupabaseAuth = () => {
     };
 
     setSupabaseAuth();
-  }, [getToken, user]);  // userを依存配列に追加
+  }, [getToken, user]); // userを依存配列に追加
 };
