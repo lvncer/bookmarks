@@ -6,9 +6,9 @@ import localFont from "next/font/local";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://clerk-next-app.vercel.app/"),
-  title: "Next.js Clerk Template",
+  title: "Bookmarks",
   description:
-    "A simple and powerful Next.js template featuring authentication and user management powered by Clerk.",
+    "A simple Bookmark Manager with Next.Js and Supabase and user management powered by Clerk.",
   openGraph: { images: ["/og.png"] },
 };
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="ja" className={`${geistSans.variable} ${geistMono.variable}`}>
       <ClerkProvider
         appearance={{
           variables: { colorPrimary: "#000000" },
